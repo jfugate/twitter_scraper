@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import tweepy
 from pprint import pprint
-import argparse, os
+import argparse, os, time
 
 
 '''
@@ -28,25 +28,39 @@ to obtain the data
 
 #Function to dump the profile data
 def profile_dump(username, outputPath):
-	set_creds()
+	api = set_creds()
 	profile_obj = api.get_user(username)
 
 #Function to dump all historic tweets
 def tweet_dump(username, outputPath):
-	set_creds()
+	api = set_creds()
 
 #Function to dump all followers of the given user
-def follower_list(username, outputPath):
-	set_creds()
+def follower_list(username):
+	api = set_creds()
+	result_list = []
+	counter = 0
+	print('Patience Comrade, this may take a long time.....')
+	for i in api.followers_ids(username):
+		result_list.append(api.get_user(i).screen_name)
+		counter += 1
+		print("Number of users followed by " + username + " found so far: " + counter)
+		time.sleep(5)
+	print(result_list)
 
 #Function to show who all the given user follows
-def follwing_list(username, outputPath):
-	set_creds()
-	result_list = api.friends_ids(username)
-	final_list = []
-	for i in result_list:
-		user = api.get_user(i)
-		final_list.append(user.screen_name)
+def following_list(username):
+	api = set_creds()
+	result_list = []
+	counter = 0
+	print('Patience Comrade, this may take a long time.....')
+	for i in api.friends_ids(username):
+		result_list.append(api.get_user(i).screen_name)
+		counter += 1
+		print("Number of users " + username + " follows found so far: " + counter)
+		time.sleep(5)
+	#Currently for testing purposes, just pring the resulting array to STDOUT
+	print(result_list)
 	#Need code for writing to CSV file or other output method here
 
 #parse the command line arguments
