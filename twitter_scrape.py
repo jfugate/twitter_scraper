@@ -21,8 +21,7 @@ def set_creds():
 '''
 user = api.get_user('someTwitterUsername')
 the above is an example of getting the user profile object from Twitter
-can use the vars(user)['user_profile_propert'] method or user.user_profile_property with pprint
-to obtain the data
+can use the vars(user)['user_profile_propert'] method to obtain the data
 '''
 
 
@@ -32,6 +31,15 @@ def profile_dump(username, outputPath):
 	profile_obj = api.get_user(username)
 
 #Function to dump all historic tweets
+'''
+useful formats for tweet_dump from manual testing
+tweets = api.user_timeline('username')
+vars(tweets[0])['_json']['text'].encode("utf-8")
+'#AlwaysPunchNazis'
+vars(tweets[0])['_json']['created_at'].encode("utf-8")
+'Thu May 03 19:04:48 +0000 2018'
+
+'''
 def tweet_dump(username, outputPath):
 	api = set_creds()
 
