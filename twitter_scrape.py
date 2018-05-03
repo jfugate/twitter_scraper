@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import tweepy
 from pprint import pprint
-import argparse
+import argparse, os
 
 
 '''
@@ -9,11 +9,11 @@ This block sets up our authentication. The keys/secrets should NOT be stored in 
 Will be setting up environment variables to prevent this later.
 '''
 def set_creds():
-	consumer_key = ""
-	consumer_secret = ""
+	consumer_key = os.getenv('consumer_key')
+	consumer_secret = os.getenv('consumer_secret')
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-	key = ''
-	secret = ''
+	key = os.getenv('key')
+	secret = os.getenv('secret')
 	auth.set_access_token(key, secret)
 	api = tweepy.API(auth)
 	return api

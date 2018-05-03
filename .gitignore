@@ -4,3 +4,4 @@ lib64
 pip-selfcheck.json
 .git/
 include/
+envvars.sh
