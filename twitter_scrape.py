@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import tweepy
 from pprint import pprint
-import argparse, os, time
+import argparse, os, time, exporter
 
 
 '''
@@ -40,11 +40,11 @@ vars(tweets[0])['_json']['created_at'].encode("utf-8")
 'Thu May 03 19:04:48 +0000 2018'
 
 '''
-def tweet_dump(username, outputPath):
+def tweet_dump(username, output_path):
 	api = set_creds()
 
 #Function to dump all followers of the given user
-def follower_list(username):
+def follower_list(username, output_path):
 	api = set_creds()
 	result_list = []
 	counter = 0
@@ -54,10 +54,11 @@ def follower_list(username):
 		counter += 1
 		print("Number of users followed by " + username + " found so far: " + counter)
 		time.sleep(5)
-	print(result_list)
+	#print(result_list)
+	exporter.export_follower(result_list, username, counter, output_path)
 
 #Function to show who all the given user follows
-def following_list(username):
+def following_list(username, output_path):
 	api = set_creds()
 	result_list = []
 	counter = 0
@@ -68,9 +69,9 @@ def following_list(username):
 		print("Number of users " + username + " follows found so far: " + counter)
 		time.sleep(5)
 	#Currently for testing purposes, just pring the resulting array to STDOUT
-	print(result_list)
+	#print(result_list)
 	#Need code for writing to CSV file or other output method here
-
+	exporter.export_following(result_list, username, counter, output_path)
 #parse the command line arguments
 def parse_arguments():
 	parser = argparse.ArgumentParser()
