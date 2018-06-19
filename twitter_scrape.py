@@ -29,8 +29,11 @@ can use the vars(user)['user_profile_propert'] method to obtain the data
 def profile_dump(username, outputPath):
 	api = set_creds()
 	profile_obj = api.get_user(username)
-	table = {'description': profile_obj.description}
-	print('description: {description:s}'.format(**table))
+	table = {'description': profile_obj.description, 'Followers': profile_obj.followers_count, 'location': profile_obj.location,
+			 'name': profile_obj.name, 'profile_image': profile_obj.profile_image_url, 'profile_banner_image': profile_obj.profile_banner_url,
+			 'verified': profile_obj.verified, 'time_zone': profile_obj.time_zone, 'account_created': profile_obj.created_at}
+	print('description: {description:s}; Follower Count: {Followers:d}; location: {location:s}; name: {name:s}; Avatar Link: {profile_image:s}; '
+		'Banner Link: {profile_banner_image:s}; Is account verified: {verified:b}, time zone: {time_zone:s}'.format(**table))
 
 #Function to dump all historic tweets
 '''
