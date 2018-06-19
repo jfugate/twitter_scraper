@@ -15,5 +15,5 @@ def export_following(data, user, counter, output_file):
 	'''
 	with open(output_file, 'ab') as csvout:
 		writer = csv.DictWriter(csvout, fieldnames = ["username", "follower_count", "follower_name", "following_count", "following_name", "tweet_history"])
-		for i in data:
-            writer.writerows('username': user, 'following_count': counter,'following_name': i)
+		for name in data:
+            writer.writerows('username': user, 'following_count': counter,'following_name': name)

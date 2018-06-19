@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import tweepy
 from pprint import pprint
-import argparse, os, time, exporter
+import argparse, os, time, json
 
 
 '''
@@ -29,6 +29,8 @@ can use the vars(user)['user_profile_propert'] method to obtain the data
 def profile_dump(username, outputPath):
 	api = set_creds()
 	profile_obj = api.get_user(username)
+	table = {'description': profile_obj.description}
+	print('description: {description:s}'.format(**table))
 
 #Function to dump all historic tweets
 '''
