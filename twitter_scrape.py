@@ -2,7 +2,7 @@
 import tweepy
 from pprint import pprint
 import argparse, os, time, json
-
+import exporter
 
 '''
 This block sets up our authentication. The keys/secrets should NOT be stored in plain text in this script.
@@ -29,11 +29,7 @@ can use the vars(user)['user_profile_propert'] method to obtain the data
 def profile_dump(username, outputPath):
 	api = set_creds()
 	profile_obj = api.get_user(username)
-	table = {'description': profile_obj.description, 'Followers': profile_obj.followers_count, 'location': profile_obj.location,
-			 'name': profile_obj.name, 'profile_image': profile_obj.profile_image_url, 'profile_banner_image': profile_obj.profile_banner_url,
-			 'verified': profile_obj.verified, 'time_zone': profile_obj.time_zone, 'account_created': profile_obj.created_at}
-	print('description: {description:s}; Follower Count: {Followers:d}; location: {location:s}; name: {name:s}; Avatar Link: {profile_image:s}; '
-		'Banner Link: {profile_banner_image:s}; Is account verified: {verified:b}, time zone: {time_zone:s}'.format(**table))
+	exporter.export_profile(profile_obj, outputPath)
 
 #Function to dump all historic tweets
 '''
@@ -57,7 +53,7 @@ def follower_list(username, output_path):
 	for i in api.followers_ids(username):
 		result_list.append(api.get_user(i).screen_name)
 		counter += 1
-		print("Number of users followed by " + username + " found so far: " + counter)
+		print("Number of users followed by " + username + " found so far: " + str(counter))
 		time.sleep(5)
 	#print(result_list)
 	exporter.export_follower(result_list, username, counter, output_path)

@@ -1,19 +1,15 @@
 #!/usr/bin/python
-import csv
 
-def csvfile_initialize(output_file):
-	with open(output_file, 'wb') as csvout:
-		writer = csv.DictWriter(csvout, fieldnames = ["username", "follower_count", "follower_name", "following_count", "following_name", "tweet_history"])
-		writer.writeheader()
+def export_profile(user, outPath):
+	with open(outPath, 'a') as profileOut:
+		table = {'description': user.description, 'Followers': user.followers_count, 'location': user.location,
+				 'name': user.name, 'profile_image': user.profile_image_url, 'profile_banner_image': user.profile_banner_url,
+			 	 'verified': user.verified, 'time_zone': user.time_zone, 'account_created': user.created_at}
+		profileOut.write('description: {description:s}; Follower Count: {Followers:d}; location: {location:s}; name: {name:s}; Avatar Link: {profile_image:s}; '
+		'Banner Link: {profile_banner_image:s}; Is account verified: {verified:b}, time zone: {time_zone:s} \n'.format(**table))
 
-def export_following(data, user, counter, output_file):
-	'''
-	data = list of usernames that given user follows
-	user = user we are making query agains
-	counter = total number of users being followed by user in question
-	output_file = path to our output
-	'''
-	with open(output_file, 'ab') as csvout:
-		writer = csv.DictWriter(csvout, fieldnames = ["username", "follower_count", "follower_name", "following_count", "following_name", "tweet_history"])
-		for name in data:
-            writer.writerows('username': user, 'following_count': counter,'following_name': name)
+
+def export_follower(result_list, username, counter, outPath):
+	with open(outPath, 'a') as follower_out:
+		follower_out.write('Number of users total followed by ' + username + ' is ' + str(counter) + ' this is a list of those users:\n')
+		follower_out.write(','.join(result_list))
