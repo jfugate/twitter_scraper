@@ -69,10 +69,8 @@ def following_list(username, output_path):
 		counter += 1
 		print("Number of users " + username + " follows found so far: " + counter)
 		time.sleep(5)
-	#Currently for testing purposes, just pring the resulting array to STDOUT
-	#print(result_list)
-	#Need code for writing to CSV file or other output method here
 	exporter.export_following(result_list, username, counter, output_path)
+
 #parse the command line arguments
 def parse_arguments():
 	parser = argparse.ArgumentParser()
