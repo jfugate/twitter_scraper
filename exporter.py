@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+
 def export_profile(user, outPath):
 	with open(outPath, 'a') as profileOut:
 		table = {'description': user.description, 'Followers': user.followers_count, 'location': user.location,
@@ -13,3 +14,8 @@ def export_follower(result_list, username, counter, outPath):
 	with open(outPath, 'a') as follower_out:
 		follower_out.write('Number of users total followed by ' + username + ' is ' + str(counter) + ' this is a list of those users:\n')
 		follower_out.write(','.join(result_list))
+
+def export_following(result_list, username, counter, outPath):
+	with open(outPath, 'a') as following_out:
+		following_out.write('Number of users total following ' + username + ' is ' + str(counter) + ' this is a list of those users:\n')
+		following_out.write(','.join(result_list))
