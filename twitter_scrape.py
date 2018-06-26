@@ -53,7 +53,7 @@ def follower_list(username, output_path):
 	for i in api.followers_ids(username):
 		result_list.append(api.get_user(i).screen_name)
 		counter += 1
-		print("Number of users followed by " + username + " found so far: " + str(counter))
+		print("Number of users that follow " + username + " found so far: " + str(counter))
 		time.sleep(5)
 	#print(result_list)
 	exporter.export_follower(result_list, username, counter, output_path)
@@ -67,7 +67,7 @@ def following_list(username, output_path):
 	for i in api.friends_ids(username):
 		result_list.append(api.get_user(i).screen_name)
 		counter += 1
-		print("Number of users " + username + " follows found so far: " + counter)
+		print("Number of users " + username + " follows found so far: " + str(counter))
 		time.sleep(5)
 	exporter.export_following(result_list, username, counter, output_path)
 
@@ -132,7 +132,7 @@ def parse_arguments():
 		elif results.followers:
 			follower_list(results.user_id, results.output_path)
 		elif results.following:
-			follwing_list(results.user_id, results.output_path)
+			following_list(results.user_id, results.output_path)
 
 
 parse_arguments()
