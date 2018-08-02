@@ -113,9 +113,9 @@ def tweet_dump(screen_name, output_path):
 def parse_arguments():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-u", "--user", help="The @username or user_id number of the Twitter user", action="store", dest="user_id")
-	parser.add_argument("-o", "--output-path", help="Path to store data that is gathered.", action="store", dest="output_path", default='./default_outfile.txt')
+	parser.add_argument("-o", "--output-path", help="Path to store data that is gathered. If not provided defaults to 'default_outfile.txt' in current working directory.", action="store", dest="output_path", default='./default_outfile.txt')
 	parser.add_argument("-p", "--profile_dump", help="Dump relevant data from user's public Twitter profile.", action="store_true", default=False, dest="prof_dump")
-	parser.add_argument("-t", "--tweet-history", help="Dump all of user's publicly available Tweets.", action="store_true", default=False, dest="tweet_history")
+	parser.add_argument("-t", "--tweet-history", help="Dump all of user's publicly available Tweets. NOTE: This ignores the output-path option, creates CSV in current working directory.", action="store_true", default=False, dest="tweet_history")
 	parser.add_argument("-f", "--follower-list", help="Dump the usernames of all the given user's followers.", action="store_true", default=False, dest="followers")
 	parser.add_argument("-F", "--following", help="Dump all usernamse that the given user is following.", action="store_true", default=False, dest="following")
 
