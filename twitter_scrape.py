@@ -113,7 +113,7 @@ def tweet_dump(screen_name, output_path):
 def parse_arguments():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-u", "--user", help="The @username or user_id number of the Twitter user", action="store", dest="user_id")
-	parser.add_argument("-o", "--output-path", help="Path to store data that is gathered.", action="store", dest="output_path")
+	parser.add_argument("-o", "--output-path", help="Path to store data that is gathered.", action="store", dest="output_path", default='./default_outfile.txt')
 	parser.add_argument("-p", "--profile_dump", help="Dump relevant data from user's public Twitter profile.", action="store_true", default=False, dest="prof_dump")
 	parser.add_argument("-t", "--tweet-history", help="Dump all of user's publicly available Tweets.", action="store_true", default=False, dest="tweet_history")
 	parser.add_argument("-f", "--follower-list", help="Dump the usernames of all the given user's followers.", action="store_true", default=False, dest="followers")
@@ -121,7 +121,7 @@ def parse_arguments():
 
 	results = parser.parse_args()
 	#Make sure a username and output path are provided:
-	if results.user_id == "" or results.output_path == "":
+	if results.user_id == "" '''or results.output_path == ""''':
 		print("Username/Output Path not provided, please provide a user/output_path.")
 		parser.print_help()
 	else:
