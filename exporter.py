@@ -1,18 +1,6 @@
 #!/usr/bin/python
 
 
-'''def export_profile(user, outPath):
-	try:
-	    with open(outPath, 'a') as profileOut:
-		    table = {'description': user.description, 'Followers': user.followers_count, 'location': user.location,
-			    	 'name': user.name, 'profile_image': user.profile_image_url, 'profile_banner_image': user.profile_banner_url,
-			 	     'verified': user.verified, 'time_zone': user.time_zone, 'account_created': user.created_at}
-		    profileOut.write('description: {description:s}; Follower Count: {Followers:d}; location: {location:s}; name: {name:s}; Avatar Link: {profile_image:s}; '
-		    'Banner Link: {profile_banner_image:s}; Is account verified: {verified:b}, time zone: {time_zone:s} \n'.format(**table))
-	except AttributeError as err:
-		err = str(err)
-		att = err.split(' ')[-1]
-		print "This profile is missing the following setting: " + att'''
 
 def export_profile(user, outPath):
 	att_list = [ 'description', 'followers_count', 'location', 'name', 'profile_image_url', 'profile_banner_url', 'verified', 'time_zone', 'created_at' ]
